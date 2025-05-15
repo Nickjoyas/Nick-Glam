@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>Catálogo: Moda, Aromas y Bijoux</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+  .menu-home-abaixo {
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem 0 0.5rem 0;
+}
+.menu-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  background: transparent;
+  color: #d4af37;
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: 2px solid #d4af37;
+  border-radius: 30px;
+  padding: 0.45em 1.2em 0.45em 1em;
+  text-decoration: none;
+  box-shadow: 0 2px 8px #d4af3720;
+  transition: background 0.18s, color 0.18s, border 0.18s, box-shadow 0.18s;
+}
+.menu-home-link:hover, .menu-home-link:focus {
+  background: #d4af37;
+  color: #181818;
+  border-color: #fff6d0;
+  box-shadow: 0 4px 18px #d4af3740;
+}
+.menu-home-link svg {
+  display: inline-block;
+  stroke: currentColor;
+  transition: stroke 0.18s;
+}
+.menu-home-link:hover svg, .menu-home-link:focus svg {
+  stroke: #181818;
+}
+
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: #181818;
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #eee;
+    }
+    .menu-categorias {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      background: #181818;
+      box-shadow: 0 2px 8px rgba(212,175,55,0.10);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 72px;
+    }
+    .menu-categorias a {
+      color: #d4af37;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding: 0.5rem 1.2rem;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .menu-categorias a:hover,
+    .menu-categorias a:focus {
+      background: #d4af37;
+      color: #181818;
+    }
+    header {
+      background: #181818;
+      box-shadow: 0 2px 8px rgba(212,175,55,0.10);
+      padding: 2rem 0 1rem 0;
+      text-align: center;
+      position: relative;
+    }
+    header h1 {
+      font-family: 'Cinzel', serif;
+      color: #d4af37;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      margin: 0;
+      text-shadow: 0 3px 12px #d4af37cc, 0 1px 1px #fff3;
+    }
+    .categoria-titulo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      color: #d4af37;
+      margin-top: 1.5rem;
+      margin-bottom: 0.7rem;
+      text-align: left;
+      text-shadow: 0 2px 10px #d4af3780, 0 1px 2px #bcbcbc99;
+      letter-spacing: 1px;
+    }
+    .produtos-carousel {
+      display: flex;
+      overflow-x: auto;
+      gap: 2rem;
+      padding-bottom: 1rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+      scrollbar-color: #d4af37 #232323;
+      margin-top: 1.5rem;
+    }
+    .produtos-carousel::-webkit-scrollbar {
+      height: 10px;
+    }
+    .produtos-carousel::-webkit-scrollbar-thumb {
+      background: #d4af37;
+      border-radius: 6px;
+    }
+    .produtos-carousel::-webkit-scrollbar-track {
+      background: #232323;
+    }
+    .produto-card {
+      min-width: 260px;
+      max-width: 300px;
+      background: #222;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(212,175,55,0.13);
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      scroll-snap-align: start;
+      padding: 1.2rem 1rem 1.4rem 1rem;
+      margin-bottom: 1rem;
+      transition: transform 0.18s, box-shadow 0.18s;
+      position: relative;
+      border: 1.5px solid #bcbcbc;
+    }
+    .produto-card:hover {
+      transform: translateY(-7px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(212,175,55,0.18), 0 2px 8px rgba(0,0,0,0.10);
+      z-index: 2;
+      border: 1.5px solid #d4af37;
+    }
+    .produto-card img {
+      width: 170px;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 10px rgba(212,175,55,0.11);
+      background: #232323;
+    }
+    .produto-titulo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      text-align: center;
+    }
+    .produto-desc {
+      font-size: 1rem;
+      color: #bcbcbc;
+      margin-bottom: 1.1rem;
+      text-align: center;
+      min-height: 48px;
+    }
+    .produto-precio {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 2px #000;
+    }
+    .produto-btn, .produto-grid-btn {
+      background: linear-gradient(90deg, #d4af37 60%, #bcbcbc 100%);
+      color: #181818;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.7rem;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(212,175,55,0.10);
+      transition: background 0.18s, transform 0.16s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 1px;
+      font-family: 'Cinzel', serif;
+    }
+    .produto-btn::after, .produto-grid-btn::after {
+      content: "";
+      position: absolute;
+      left: -75%;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.0) 100%);
+      transform: skewX(-25deg);
+      transition: left 0.5s;
+      pointer-events: none;
+    }
+    .produto-btn:hover, .produto-grid-btn:hover {
+      background: linear-gradient(90deg, #fff6d0 10%, #d4af37 90%);
+      transform: scale(1.06);
+      box-shadow: 0 0 18px 2px #d4af37cc;
+    }
+    .produto-btn:hover::after, .produto-grid-btn:hover::after {
+      left: 120%;
+      transition: left 0.5s;
+    }
+    .categoria {
+      max-width: 1200px;
+      margin: 2.5rem auto 0 auto;
+      padding: 0 2vw 2.5rem 2vw;
+      background: linear-gradient(120deg, #191919 70%, #a5a5a5 100%);
+      border-radius: 18px;
+      box-shadow: 0 2px 16px rgba(212,175,55,0.10);
+      scroll-margin-top: 80px;
+      border: 1.5px solid #bcbcbc;
+    }
+    .categoria-desc {
+      font-size: 1.1rem;
+      color: #bcbcbc;
+      margin-bottom: 0.7rem;
+      text-align: left;
+    }
+    .categoria-exitos {
+      font-size: 1.09rem;
+      color: #fff;
+      font-family: 'Cinzel', serif;
+      margin-bottom: 1.7rem;
+      margin-left: 2px;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 2px #000;
+    }
+    .produtos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+      margin-top: 1.5rem;
+    }
+    .produto-grid-card {
+      background: linear-gradient(120deg, #232323 80%, #bcbcbc 100%);
+      border-radius: 20px;
+      box-shadow: 0 2px 16px rgba(212,175,55,0.13);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem 1.3rem 1rem;
+      transition: transform 0.22s, box-shadow 0.22s, border 0.22s;
+      position: relative;
+      border: 2px solid #232323;
+    }
+    .produto-grid-card:hover {
+      transform: scale(1.04) translateY(-8px);
+      box-shadow: 0 8px 32px rgba(212,175,55,0.18), 0 2px 8px rgba(0,0,0,0.10);
+      border: 2px solid #d4af37;
+      z-index: 2;
+    }
+    .produto-grid-card img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 10px rgba(212,175,55,0.13);
+      background: #191919;
+    }
+    .produto-grid-titulo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.2rem;
+      color: #d4af37;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      text-align: center;
+      text-shadow: 0 2px 10px #d4af3780, 0 1px 2px #bcbcbc99;
+    }
+    .produto-grid-desc {
+      font-size: 1rem;
+      color: #bcbcbc;
+      margin-bottom: 1.1rem;
+      text-align: center;
+      min-height: 48px;
+    }
+    .produto-grid-precio {
+      color: #fff;
+      font-size: 1.13rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 2px #000;
+    }
+    /* --- BIJOUX GRADE EXCLUSIVA --- */
+    .bijoux-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+      margin-top: 1.5rem;
+      padding-bottom: 1rem;
+    }
+    .bijoux-card {
+      background: rgba(38,38,38,0.85);
+      border-radius: 22px;
+      box-shadow: 0 8px 32px #d4af3740, 0 2px 8px #0003;
+      border: 2.5px solid #d4af37;
+      padding: 2.2rem 1.2rem 1.6rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.22s, box-shadow 0.22s, border 0.22s;
+      position: relative;
+      backdrop-filter: blur(3px);
+    }
+    .bijoux-card:hover {
+      transform: scale(1.045) translateY(-8px);
+      box-shadow: 0 12px 36px 0 #d4af37cc, 0 2px 8px #0006;
+      border: 2.5px solid #fff6d0;
+      z-index: 2;
+    }
+    .bijoux-imgbox {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 3px 16px #d4af3755;
+      background: #191919;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bijoux-imgbox img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(.4,1.3,.6,1);
+    }
+    .bijoux-card:hover .bijoux-imgbox img {
+      transform: scale(1.08) rotate(-2deg);
+    }
+    .bijoux-titulo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      color: #d4af37;
+      margin-bottom: 0.3rem;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 10px #d4af3780, 0 1px 2px #bcbcbc99;
+      text-transform: uppercase;
+    }
+    .bijoux-desc {
+      font-size: 0.97rem;
+      color: #bcbcbc;
+      margin-bottom: 1.1rem;
+      text-align: center;
+      min-height: 38px;
+      font-style: italic;
+    }
+    .bijoux-precio {
+      color: #fff;
+      font-size: 1.09rem;
+      font-weight: 600;
+      margin-bottom: 1.1rem;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 2px #000;
+    }
+    .bijoux-btn {
+      background: transparent;
+      color: #d4af37;
+      border: 1.5px solid #d4af37;
+      border-radius: 8px;
+      padding: 0.65rem 1.5rem;
+      font-size: 1rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 1px;
+      box-shadow: none;
+    }
+    .bijoux-btn::after {
+      content: "";
+      position: absolute;
+      left: -75%;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.0) 100%);
+      transform: skewX(-25deg);
+      transition: left 0.5s;
+      pointer-events: none;
+    }
+    .bijoux-btn:hover {
+      background: #d4af37;
+      color: #181818;
+      box-shadow: 0 0 18px 2px #d4af37cc;
+    }
+    .bijoux-btn:hover::after {
+      left: 120%;
+      transition: left 0.5s;
+    }
+    @media (max-width: 700px) {
+      .menu-categorias {
+        height: 56px;
+        font-size: 1rem;
+      }
+      .carrossel-destaques, .categoria {
+        padding: 0 2vw 1.5rem 2vw;
+      }
+      .produtos-carousel {
+        gap: 1rem;
+      }
+      .produto-card {
+        min-width: 85vw;
+        max-width: 90vw;
+        padding: 1rem 0.5rem 1.2rem 0.5rem;
+      }
+      .produto-card img, .produto-grid-card img, .bijoux-imgbox {
+        width: 110px;
+        height: 110px;
+      }
+      .produtos-grid, .bijoux-grid {
+        gap: 1.1rem;
+      }
+    }
+    .footer-marcas-horizontal {
+      width: 100%;
+      background: linear-gradient(90deg, #181818 70%, #bcbcbc 100%);
+      border-top: 2px solid #d4af37;
+      color: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1.4rem 0.7rem 1.1rem 0.7rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1.08rem;
+      letter-spacing: 0.5px;
+      box-sizing: border-box;
+      margin-top: 3rem;
+    }
+    .footer-label {
+      color: #d4af37;
+      font-family: 'Cinzel', serif;
+      font-size: 1.1rem;
+      margin-right: 1.3rem;
+      letter-spacing: 1px;
+    }
+    .footer-marca {
+      color: #bcbcbc;
+      background: rgba(255,255,255,0.06);
+      padding: 0.35em 1em;
+      border-radius: 18px;
+      border: 1.5px solid #bcbcbc;
+      margin: 0 0.1em;
+      transition: color 0.18s, background 0.18s, border 0.18s;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+    .footer-marca:hover {
+      color: #d4af37;
+      background: #232323;
+      border: 1.5px solid #d4af37;
+    }
+    .newsletter-luxo {
+      background: #232323;
+      border-radius: 14px;
+      padding: 2rem 1rem 1.5rem 1rem;
+      margin: 2rem auto 1rem auto;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(212,175,55,0.08);
+    }
+    .newsletter-luxo h3 {
+      color: #d4af37;
+      font-family: 'Cinzel', serif;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 10px #d4af3780, 0 1px 2px #bcbcbc99;
+    }
+    .newsletter-luxo input {
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+      outline: none;
+    }
+    .newsletter-luxo button {
+      background: #d4af37;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1.2rem;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.18s;
+    }
+    .newsletter-luxo button:hover {
+      background: #bcbcbc;
+      color: #181818;
+    }
+    .pagos-footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      font-size: 1.15rem;
+      color: #d4af37;
+      margin: 1.5rem 0 0.5rem 0;
+      opacity: 0.85;
+    }
+    .formas-pago i, .formas-pago .bizum-icon {
+      margin-right: 0.5em;
+      font-size: 1.35em;
+      vertical-align: middle;
+    }
+    .formas-pago .bizum-icon {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1em;
+      background: #fff;
+      color: #181818;
+      border-radius: 7px;
+      padding: 0.1em 0.65em;
+      margin-left: 0.1em;
+      margin-right: 0.5em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border: 1px solid #d4af37;
+      box-shadow: 0 1px 4px #d4af3720;
+    }
+    .mini-pago-seguro {
+      font-size: 0.98em;
+      color: #bcbcbc;
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+    }
+    .mini-pago-seguro i {
+      color: #d4af37;
+      font-size: 1em;
+    }
+    .instagram-footer {
+      text-align: center;
+      font-size: 1.08rem;
+      color: #d4af37;
+      margin: 1.2rem 0 2rem 0;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+    }
+    .instagram-footer a {
+      color: #fff;
+      text-decoration: underline;
+      margin-left: 0.4em;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+    .instagram-footer a:hover {
+      color: #d4af37;
+    }
+  </style>
+</head>
+<body>
+<!-- Menu Home abaixo do Bijoux -->
+<nav class="menu-home-abaixo">
+  <a href="index.html" class="menu-home-link">
+    <svg width="20" height="20" viewBox="0 0 22 22" fill="none" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;">
+      <path d="M3 10.5L11 4L19 10.5"/>
+      <path d="M5 9.5V18H17V9.5"/>
+      <path d="M9 18V13H13V18"/>
+    </svg>
+    <span>Home</span>
+  </a>
+</nav>
+
+
+  <nav class="menu-categorias">
+    <a href="#moda">Moda</a>
+    <a href="#aromas">Aromas</a>
+    <a href="#bijoux">Bijoux</a>
+  </nav>
+  <header>
+    <h1>Catálogo Exclusivo</h1>
+    <p style="color:#bcbcbc; margin-top:0.5rem; font-size:1.1rem;">Descubre nuestras selecciones de moda, aromas y bijoux para inspirar tu día</p>
+  </header>
+
+  <!-- Carrossel de Mais Vendidos -->
+  <section class="carrossel-destaques categoria">
+    <div class="carrossel-titulo categoria-titulo">Más Vendidos</div>
+    <div class="carrossel-desc">
+      Descubre los productos favoritos de nuestros clientes, seleccionados por su calidad y popularidad.
+    </div>
+    <div class="produtos-carousel">
+      <div class="produto-card">
+        <img src="https://static.nike.com/a/images/t_PDP_864_v1/f_auto,q_auto:eco/2f9b2a9e-7f49-4e0b-8b6c-8f7e7a2d3e8e/air-force-1-07-mens-shoes-jBrhbr.png" alt="Nike Air Force 1">
+        <div class="produto-titulo">Nike Air Force 1</div>
+        <div class="produto-desc">Zapatillas icónicas que combinan comodidad y estilo urbano.</div>
+        <div class="produto-precio">€99,99</div>
+        <button class="produto-btn">Comprar</button>
+      </div>
+      <div class="produto-card">
+        <img src="https://cdn.shopify.com/s/files/1/0256/4593/9357/products/bolsa-feminina-preta.jpg?v=1661973260" alt="Bolso Negro Elegante">
+        <div class="produto-titulo">Bolso Negro Elegante</div>
+        <div class="produto-desc">Un accesorio versátil y sofisticado para cualquier ocasión.</div>
+        <div class="produto-precio">€79,90</div>
+        <button class="produto-btn">Comprar</button>
+      </div>
+      <div class="produto-card">
+        <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Gafas de Sol Vintage">
+        <div class="produto-titulo">Gafas de Sol Vintage</div>
+        <div class="produto-desc">Protección UV400 y diseño retro para un look sofisticado.</div>
+        <div class="produto-precio">€49,00</div>
+        <button class="produto-btn">Comprar</button>
+      </div>
+      <div class="produto-card">
+        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=400&q=80" alt="Reloj Minimalista">
+        <div class="produto-titulo">Reloj Minimalista</div>
+        <div class="produto-desc">Diseño limpio, correa de cuero genuino y resistencia al agua.</div>
+        <div class="produto-precio">€120,00</div>
+        <button class="produto-btn">Comprar</button>
+      </div>
+      <div class="produto-card">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Chaqueta Vaquera Unisex">
+        <div class="produto-titulo">Chaqueta Vaquera Unisex</div>
+        <div class="produto-desc">Versátil y moderna, ideal para cualquier temporada.</div>
+        <div class="produto-precio">€89,90</div>
+        <button class="produto-btn">Comprar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Moda -->
+  <section class="categoria" id="moda">
+    <div class="categoria-titulo">Moda</div>
+    <div class="categoria-desc">
+      Inspirado en las colecciones de Guess y Louis Vuitton, nuestra sección de moda ofrece elegancia, exclusividad y tendencias internacionales.
+    </div>
+    <div class="categoria-exitos">Los éxitos</div>
+    <div class="produtos-grid">
+      <div class="produto-grid-card">
+        <img src="https://assets.guess.com/guess_us/default/large/SG787523_JBLK-ALT1.jpg" alt="Guess Bolso Negro">
+        <div class="produto-grid-titulo">Guess Bolso Negro</div>
+        <div class="produto-grid-desc">Bolso de mano elegante, perfecto para eventos y uso diario.</div>
+        <div class="produto-grid-precio">€120,00</div>
+        <button class="produto-grid-btn">Comprar</button>
+      </div>
+      <div class="produto-grid-card">
+        <img src="https://eu.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-brazalete-lv-iconic-moda--M00587_PM2_Front%20view.jpg" alt="Louis Vuitton Brazalete">
+        <div class="produto-grid-titulo">Louis Vuitton Brazalete</div>
+        <div class="produto-grid-desc">Accesorio de lujo con el icónico logo LV, símbolo de sofisticación.</div>
+        <div class="produto-grid-precio">€350,00</div>
+        <button class="produto-grid-btn">Comprar</button>
+      </div>
+      <div class="produto-grid-card">
+        <img src="https://assets.guess.com/guess_us/default/large/M1GA51R2Y00-G7I6-ALT1.jpg" alt="Guess Camiseta Logo">
+        <div class="produto-grid-titulo">Guess Camiseta Logo</div>
+        <div class="produto-grid-desc">Camiseta casual con logo Guess, ideal para un look moderno.</div>
+        <div class="produto-grid-precio">€59,00</div>
+        <button class="produto-grid-btn">Comprar</button>
+      </div>
+      <div class="produto-grid-card">
+        <img src="https://eu.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-zapatilla-lv-trainer-moda--BM9U1PMI02_PM2_Front%20view.jpg" alt="Louis Vuitton Zapatilla">
+        <div class="produto-grid-titulo">Louis Vuitton Zapatilla</div>
+        <div class="produto-grid-desc">Zapatilla de lujo, mezcla de tradición y modernidad.</div>
+        <div class="produto-grid-precio">€890,00</div>
+        <button class="produto-grid-btn">Comprar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Aromas -->
+  <section class="categoria" id="aromas">
+    <div class="categoria-titulo">Aromas</div>
+    <div class="categoria-desc">
+      Inspirado en Latafa Perfumes Dubai, descubre fragancias exóticas y refinadas que transforman cualquier ambiente o estilo personal.
+    </div>
+    <div class="categoria-exitos">Los éxitos</div>
+    <div class="produtos-grid">
+      <div class="produto-grid-card">
+        <img src="https://latafa.com/cdn/shop/products/oud-mood-100ml-perfume.jpg?v=1678870534" alt="Latafa Oud Mood">
+        <div class="produto-grid-titulo">Latafa Oud Mood</div>
+        <div class="produto-grid-desc">Perfume oriental con notas de oud, ámbar y especias.</div>
+        <div class="produto-grid-precio">€39,00</div>
+        <button class="produto-grid-btn">Comprar</button>
+      </div>
+      <div class="produto-grid-card">
+        <img src="https://latafa.com/cdn/shop/products/maahir-100ml-perfume.jpg?v=1678870534" alt="Latafa Maahir">
+        <div class="produto-grid-titulo">Latafa Maahir</div>
+        <div class="produto-grid-desc">Fragancia intensa y envolvente, perfecta para ocasiones especiales.</div>
+        <div class="produto-grid-precio">€42,00</div>
+        <button class="produto-grid-btn">Comprar</button>
+      </div>
+      <div class="produto-grid-card">
+        <img src="https://latafa.com/cdn/shop/products/ramz-silver-100ml-perfume.jpg?v=1678870534" alt="Latafa Ramz Silver">
+        <div class="produto-grid-titulo">Latafa Ramz Silver</div>
+        <div class="produto-grid-desc">Aromas frescos y modernos, unisex y sofisticado.</div>
+        <div class="produto-grid-precio">€36,00</div>
+        <button class="produto-grid-btn">Comprar</button>
+      </div>
+      <div class="produto-grid-card">
+        <img src="https://latafa.com/cdn/shop/products/velvet-oud-100ml-perfume.jpg?v=1678870534" alt="Latafa Velvet Oud">
+        <div class="produto-grid-titulo">Latafa Velvet Oud</div>
+        <div class="produto-grid-desc">Notas de oud y vainilla para una experiencia lujosa.</div>
+        <div class="produto-grid-precio">€44,00</div>
+        <button class="produto-grid-btn">Comprar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Bijoux exclusiva -->
+  <section class="categoria" id="bijoux">
+    <div class="categoria-titulo">Bijoux</div>
+    <div class="categoria-desc">
+      Descubre Bijoux: una colección exclusiva de pulseras, anillos, collares y pendientes con diseño contemporáneo, brillo y sofisticación. Renueva tu look con piezas que marcan tendencia.
+    </div>
+    <div class="categoria-exitos">Los éxitos</div>
+    <div class="bijoux-grid">
+      <div class="bijoux-card">
+        <div class="bijoux-imgbox">
+          <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80" alt="Pulsera Dorada">
+        </div>
+        <div class="bijoux-titulo">Pulsera Dorada</div>
+        <div class="bijoux-desc">Minimalismo y elegancia en oro, para cualquier ocasión.</div>
+        <div class="bijoux-precio">€39,00</div>
+        <button class="bijoux-btn">Comprar</button>
+      </div>
+      <div class="bijoux-card">
+        <div class="bijoux-imgbox">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=400&q=80" alt="Anillo Moderno">
+        </div>
+        <div class="bijoux-titulo">Anillo Moderno</div>
+        <div class="bijoux-desc">Geometría y brillo en plata, tendencia española.</div>
+        <div class="bijoux-precio">€29,00</div>
+        <button class="bijoux-btn">Comprar</button>
+      </div>
+      <div class="bijoux-card">
+        <div class="bijoux-imgbox">
+          <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Collar de Perlas">
+        </div>
+        <div class="bijoux-titulo">Collar de Perlas</div>
+        <div class="bijoux-desc">Clásico, atemporal y siempre sofisticado.</div>
+        <div class="bijoux-precio">€59,00</div>
+        <button class="bijoux-btn">Comprar</button>
+      </div>
+      <div class="bijoux-card">
+        <div class="bijoux-imgbox">
+          <img src="https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80" alt="Pendientes Boho">
+        </div>
+        <div class="bijoux-titulo">Pendientes Boho</div>
+        <div class="bijoux-desc">Color y movimiento para un look bohemio chic.</div>
+        <div class="bijoux-precio">€19,00</div>
+        <button class="bijoux-btn">Comprar</button>
+      </div>
+      <div class="bijoux-card">
+        <div class="bijoux-imgbox">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80" alt="Set Minimalista">
+        </div>
+        <div class="bijoux-titulo">Set Minimalista</div>
+        <div class="bijoux-desc">Anillo y pulsera en acero, para el día a día.</div>
+        <div class="bijoux-precio">€45,00</div>
+        <button class="bijoux-btn">Comprar</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="newsletter-luxo">
+    <h3>Recibe novedades y ofertas exclusivas</h3>
+    <form>
+      <input type="email" placeholder="Tu email" required>
+      <button type="submit">Suscribirme</button>
+    </form>
+  </div>
+  
+  <div class="pagos-footer">
+    <span class="formas-pago">
+      <i class="fa-brands fa-cc-visa" title="Visa"></i>
+      <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+      <i class="fa-brands fa-cc-paypal" title="PayPal"></i>
+      <span class="bizum-icon" title="Bizum">Bizum</span>
+      <i class="fa-solid fa-credit-card" title="Tarjeta"></i>
+    </span>
+    <span class="mini-pago-seguro">
+      <i class="fas fa-shield-alt"></i> Pago seguro
+    </span>
+  </div>
+
+  <div class="instagram-footer">
+    Síguenos en Instagram <a href="https://instagram.com/SEUINSTAGRAM" target="_blank">@NICK*GLAM</a>
+  </div>
+</body>
+</html>

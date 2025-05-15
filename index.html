@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<style>
+
+/*Destaque*/
+.destaques-animado {
+  margin-top: 16px;
+  font-size: 1.5em;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  font-weight: bold;
+  background: linear-gradient(90deg, #FFD700, #7B68EE, #3498db, #2ecc71, #FFD700);
+  background-size: 500% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: destaqueAnimado 3s linear infinite;
+  text-align: center;
+  letter-spacing: 2px;
+}
+@keyframes destaqueAnimado {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+#menu-lateral.aberto {
+  transform: translateX(0) !important;
+}
+.menu-link.active {
+  background: #f0f0f0 !important;
+}
+</style>
+<style>
+<div class="destaques-container"></div>
+
+}
+#menu-lateral.aberto {
+  transform: translateX(0) !important;
+}
+</style>
+
+<head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>NICKJOYAS | Joyería Premium</title>
+    <script async src="https://unpkg.com/three@0.132.2/build/three.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="menu.css">
+  <head>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --black: #0a0a0a;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Marcellus', serif;
+            background: var(--black);
+            color: #fff;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        .logo-container {
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            background: linear-gradient(to right, #D4AF37, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1.5px;
+            margin: 0.5rem 0;
+        }
+
+        /* Estilo do novo botão Nick Hair */
+        .nickhair-banner {
+            background: linear-gradient(135deg, #D4AF37 0%, #FFD700 50%, #D4AF37 100%);
+            color: var(--black);
+            text-align: center;
+            padding: 1.5rem;
+            margin: 2rem 1.5rem 1.5rem;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            z-index: 5;
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.5);
+            transition: var(--transition);
+        }
+
+        .nickhair-banner:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.7);
+        }
+
+        .nickhair-btn {
+            background: var(--black);
+            color: var(--gold);
+            border: 2px solid var(--black);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            margin-top: 0.5rem;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .nickhair-btn:hover {
+            background: transparent;
+            color: var(--black);
+            transform: scale(1.05);
+        }
+
+        .nickhair-text {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .cart-icon {
+            position: relative;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: 1.2rem;
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .producto-card {
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .producto-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .producto-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .reseñas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+            gap: 1.2rem;
+            padding: 2rem 1.5rem;
+        }
+
+        .reseña-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            transform: scale(0.95);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .reseña-card.visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Estilos do carrito */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: #1a1a1a;
+            z-index: 1001;
+            overflow-y: auto;
+            transition: var(--transition);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .cart-title {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            padding: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 1rem;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #e74c3c;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 25px;
+            height: 25px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            margin: 0 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background: #FFD700;
+        }
+
+        /* Botones y barra de contacto */
+        .add-to-cart {
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            margin: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .add-to-cart:hover {
+            background: #FFD700;
+            transform: translateY(-2px);
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+            z-index: 1000;
+            animation: pulse 1.5s infinite;
+        }
+
+        .contact-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 20px;
+            border-radius: 30px;
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 999;
+        }
+
+        .phone-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            border-left: 1px solid rgba(212, 175, 55, 0.3);
+            padding-left: 15px;
+        }
+
+        .social-link {
+            color: var(--gold);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover, .phone-link:hover {
+            opacity: 0.8;
+            transform: translateY(-1px);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Mensaje de carrito vacío */
+        .empty-cart {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<script src="menu.js"></script>
+  <script src="produtos.js"></script>
+<script src="produtos.js"></script>
+<script src="index.js"></script>
+
+
+<body>
+         
+    <canvas id="particles-canvas"></canvas>
+    <div id="catalogo"></div>
+    <script src="produtos.js"></script>
+    
+    <!-- Logo NICKJOYAS -->
+<div class="logo-container">
+    <h1 class="logo">NICK*GLAM</h1>
+    <div style="display: flex; align-items: center; gap: 1rem;">
+        <div class="cart-icon" id="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </div>
+</div>
+
+  
+    <!-- Nuevo banner Nick Hair -->
+    <div class="nickhair-banner">
+        <p class="nickhair-text">Nuestro catalogo completo</p>
+        <a href="https://instabio.cc/nicoletrindade" id="nickhair-link" class="nickhair-btn">
+            Accede y descubre más
+        </a>
+    </div>
+    <div class="destaques-animado">Destaques</div>
+
+
+    <section class="productos-grid" id="productos-container"></section>
+
+    <section class="reseñas-grid" id="reseñas-container"></section>
+
+    <!-- Overlay del carrito -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <!-- Sidebar del carrito -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2 class="cart-title">Tu Carrito</h2>
+            <button class="close-cart" id="close-cart">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Los items del carrito se añadirán aquí dinámicamente -->
+            <div class="empty-cart">Tu carrito está vacío</div>
+        </div>
+        <div class="cart-footer" id="cart-footer" style="display: none;">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total">0 €</span>
+            </div>
+            <button class="checkout-btn" id="checkout-btn">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <div class="contact-bar">
+        <a href="tel:+34624129119" class="phone-link">
+            <i class="fas fa-phone-alt"></i> +34 624 12 91 19
+        </a>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/tuinstagram" target="_blank" class="social-link">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/tufacebook" target="_blank" class="social-link">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </div>
+    </div>
+
+    <a href="https://wa.me/+35624129119" class="whatsapp-btn">
+        <i class="fab fa-whatsapp" style="color: white; font-size: 1.5rem;"></i>
+    </a>
+
+    <script>
+        // Three.js - Configuración Original 
+        function initParticles() {
+            const canvas = document.getElementById('particles-canvas');
+            const renderer = new THREE.WebGLRenderer({ 
+                canvas,
+                alpha: true,
+                antialias: true
+            });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            const geometry = new THREE.BufferGeometry();
+            const vertices = [];
+            for(let i = 0; i < 800; i++) {
+                vertices.push(
+                    (Math.random() - 0.5) * 10,
+                    (Math.random() - 0.5) * 10,
+                    (Math.random() - 0.5) * 10
+                );
+            }
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.03,
+                color: 0xD4AF37,
+                transparent: true,
+                opacity: 0.6,
+                sizeAttenuation: true
+            });
+
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            function animate() {
+                requestAnimationFrame(animate);
+                particles.rotation.x += 0.001;
+                particles.rotation.y += 0.0015;
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // Productos en español
+        const productos = [
+            {
+                id: 1,
+                img: 'https://m.media-amazon.com/images/I/61zfpWH31NL._AC_UF894,1000_QL80_FMwebp_.jpg',
+                nombre: 'Perfume Yara Lattafa',
+                precio: 45.60,
+                desc: 'Perfume feminino Yara 100 ml por Lattafa'
+            },
+            {
+                id: 2,
+                img: 'https://images.unsplash.com/photo-1610223515982-5bae48b7c2c2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTgwOTN8MHwxfHNlYXJjaHw3MXx8Q29sYXJ8ZW58MHx8fHwxNzQ0MjM1MTgzfDA&ixlib=rb-4.0.3&q=80&w=1080',
+                nombre: 'Collar Eclipse',
+                precio: 389.90,
+                desc: 'Oro blanco 18k con colgante circular'
+            },
+            {
+                id: 3,
+                img: 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?w=600&q=80',
+                nombre: 'Pendientes Celestiales',
+                precio: 189.90,
+                desc: 'Circonita cúbica con acabado brillante'
+            },
+            {
+                id: 4,
+                img: 'https://images.unsplash.com/photo-1595370239057-4f721a8bb505?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxMTgwOTN8MHwxfHNlYXJjaHw3NHx8QW5pbGxvfGVufDB8fHx8MTc0NDIzNDcwN3ww&ixlib=rb-4.0.3&q=80&w=1080',
+                nombre: 'Anillo Vortex',
+                precio: 329.90,
+                desc: 'Diseño geométrico en plata esterlina'
+            },
+            {
+                id: 5,
+                img: 'https://images.unsplash.com/photo-1601821765780-754fa98637c1?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                nombre: 'Collar Mujer Luna Blind',
+                precio: 599.90,
+                desc: 'Colección completa en oro rose 18k'
+            },
+            {
+                id: 6,
+                img: 'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=600&q=80',
+                nombre: 'Piercing Estrella',
+                precio: 149.90,
+                desc: 'Acero quirúrgico con detalle de cristal'
+            },
+            {
+                id: 7,
+                img: 'https://images.unsplash.com/photo-1616486029423-aaa4789e8c9a?w=600&q=80',
+                nombre: 'Tobillera Luna',
+                precio: 219.90,
+                desc: 'Plata rodinada con colgante ajustable'
+                
+            },
+            {
+                id: 8,
+                img: 'https://images.unsplash.com/photo-1588128211445-38bc87d6fef2?q=80&w=2706&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                nombre: 'Anillo Oro 8k',
+                precio: 159.90,
+                desc: 'Oro 8k Premium Plus Mujer'
+                
+            }
+        ];
+
+        // Reseñas en español
+        const reseñas = [
+            {
+                foto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=80',
+                nombre: 'Sofía M.',
+                texto: '¡Calidad excepcional! Entrega rápida y atención perfecta.',
+                stars: '★★★★★'
+            },
+            {
+                foto: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=100&q=80',
+                nombre: 'Carlos R.',
+                texto: 'Productos únicos y servicio personalizado.',
+                stars: '★★★★★'
+            },
+            {   
+                foto: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?w=100&q=80',
+                nombre: 'Ana G.',
+                texto: 'El empaque es tan premium como las joyas.',
+                stars: '★★★★☆'
+            },
+            {
+                foto: 'https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=100&q=80',
+                nombre: 'David L.',
+                texto: 'Inversión que vale cada euro. ¡Impresionante!',
+                stars: '★★★★★'
+            },
+            {
+                foto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&q=80',
+                nombre: 'Elena C.',
+                texto: 'Cada pieza es una obra de arte. 100% recomendado.',
+                stars: '★★★★★'
+            }
+        ];
+
+        // Sistema de Carrito
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Elementos del DOM
+        const cartIcon = document.getElementById('cart-icon');
+        const cartCount = document.getElementById('cart-count');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const closeCart = document.getElementById('close-cart');
+        const cartItems = document.getElementById('cart-items');
+        const cartFooter = document.getElementById('cart-footer');
+        const cartTotal = document.getElementById('cart-total');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const nickhairLink = document.getElementById('nickhair-link');
+
+        // Función para actualizar el link de Nick Hair
+        function updateNickHairLink(url) {
+            nickhairLink.href = url;
+        }
+
+        // Funciones del carrito
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+
+        function saveCart() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    nombre: product.nombre,
+                    precio: product.precio,
+                    img: product.img,
+                    quantity: 1
+                });
+            }
+            
+            saveCart();
+            renderCartItems();
+            showCart();
+            
+            // Animación de confirmación
+            const btn = event.target;
+            btn.innerHTML = '<i class="fas fa-check"></i> Añadido';
+            btn.style.background = '#4CAF50';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Añadir al carrito';
+                btn.style.background = 'var(--gold)';
+            }, 2000);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            saveCart();
+            renderCartItems();
+        }
+
+        function updateQuantity(productId, newQuantity) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity = newQuantity > 0 ? newQuantity : 1;
+                saveCart();
+                renderCartItems();
+            }
+        }
+
+        function calculateTotal() {
+            return cart.reduce((total, item) => total + (item.precio * item.quantity), 0);
+        }
+
+        function renderCartItems() {
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<div class="empty-cart">Tu carrito está vacío</div>';
+                cartFooter.style.display = 'none';
+                return;
+            }
+            
+            cartFooter.style.display = 'block';
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <img src="${item.img}" alt="${item.nombre}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <h3 class="cart-item-title">${item.nombre}</h3>
+                        <p class="cart-item-price">${item.precio.toFixed(2)} €</p>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                            <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-id="${item.id}">
+                            <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                        </div>
+                        <button class="cart-item-remove" data-id="${item.id}">Eliminar</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            cartTotal.textContent = `${calculateTotal().toFixed(2)} €`;
+            
+            // Event listeners para los botones de cantidad y eliminar
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.dataset.id);
+                    const item = cart.find(item => item.id === id);
+                    if (item && item.quantity > 1) {
+                        updateQuantity(id, item.quantity - 1);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.dataset.id);
+                    const item = cart.find(item => item.id === id);
+                    if (item) {
+                        updateQuantity(id, item.quantity + 1);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.addEventListener('change', () => {
+                    const id = parseInt(input.dataset.id);
+                    const newQuantity = parseInt(input.value) || 1;
+                    updateQuantity(id, newQuantity);
+                });
+            });
+            
+            document.querySelectorAll('.cart-item-remove').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const id = parseInt(btn.dataset.id);
+                    removeFromCart(id);
+                });
+            });
+        }
+
+        function showCart() {
+            cartOverlay.classList.add('active');
+            cartSidebar.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function hideCart() {
+            cartOverlay.classList.remove('active');
+            cartSidebar.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Event listeners
+        cartIcon.addEventListener('click', showCart);
+        cartOverlay.addEventListener('click', hideCart);
+        closeCart.addEventListener('click', hideCart);
+
+        checkoutBtn.addEventListener('click', () => {
+            alert('¡Gracias por tu compra! Total: ' + calculateTotal().toFixed(2) + ' €');
+            cart = [];
+            saveCart();
+            renderCartItems();
+            hideCart();
+        });
+
+        // Funciones de renderizado
+        function renderProductos() {
+            const container = document.getElementById('productos-container');
+            container.innerHTML = productos.map(producto => `
+                <div class="producto-card">
+                    <img src="${producto.img}" alt="${producto.nombre}" 
+                         class="producto-img" loading="lazy" width="600" height="400">
+                    <div style="padding: 1rem; flex-grow: 1;">
+                        <h3 style="color: var(--gold); margin-bottom: 0.5rem;">${producto.nombre}</h3>
+                        <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">${producto.desc}</p>
+                        <p style="font-weight: 600; margin-bottom: 1rem;">${producto.precio.toFixed(2)} €</p>
+                        <button class="add-to-cart" onclick="addToCart(${JSON.stringify(producto).replace(/"/g, '&quot;')})">
+                            <i class="fas fa-shopping-cart"></i> Añadir al carrito
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderReseñas() {
+            const container = document.getElementById('reseñas-container');
+            container.innerHTML = reseñas.map(reseña => `
+                <div class="reseña-card">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <img src="${reseña.foto}" alt="${reseña.nombre}" 
+                             style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                        <div>
+                            <div style="color: var(--gold);">${reseña.stars}</div>
+                            <h4 style="font-size: 1rem;">${reseña.nombre}</h4>
+                        </div>
+                    </div>
+                    <p style="font-style: italic; font-size: 0.9rem;">"${reseña.texto}"</p>
+                </div>
+            `).join('');
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        window.addEventListener('load', () => {
+            initParticles();
+            renderProductos();
+            renderReseñas();
+            renderCartItems();
+            updateCartCount();
+            
+            document.querySelectorAll('.producto-card, .reseña-card').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Actualizar el link con el que me envíes
+            // updateNickHairLink('URL_QUE_ME_ENVIES');
+        });
+
+        document.querySelectorAll('.producto-card').forEach(card => {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('add-to-cart')) {
+                    card.style.transform = 'scale(0.98)';
+                    setTimeout(() => card.style.transform = '', 100);
+                }
+              
+            });
+        });
+  // Controle do Menu Hamburguer
+const menuHamburguer = document.getElementById('menu-hamburguer');
+const menuLateral = document.getElementById('menu-lateral');
+  
+menuHamburguer.addEventListener('click', () => {
+    menuHamburguer.classList.toggle('ativo');
+    menuLateral.classList.toggle('aberto');
+});
+
+// Fechar menu ao clicar nos links
+document.querySelectorAll('.menu-link').forEach(link => {
+    link.addEventListener('click', () => {
+        menuHamburguer.classList.remove('ativo');
+        menuLateral.classList.remove('aberto');
+    });
+});
+    </script>
+</body>
+</html>
